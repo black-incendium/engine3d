@@ -1,0 +1,17 @@
+*
+{
+	margin: 0;
+	font-family: 'Lato', sans-serif;
+}
+
+body
+{
+	background-color: black;
+}
+
+canvas
+{
+	position: absolute;
+	transform: scale(0.5);
+	transform-origin: top left;
+}
