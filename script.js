@@ -266,19 +266,22 @@ function draw() {
 window.requestAnimationFrame(draw);
 
 canvas.requestPointerLock = canvas.requestPointerLock || canvas.mozRequestPointerLock;
+
 document.querySelector(".start span").addEventListener('click', function(){
-    let promise1 = canvas.requestPointerLock();
-    let promise2 = canvas.requestFullscreen();
-    Promise.all([promise1, promise2]).then(_=>{
-        document.querySelector('.description').classList.add('hidden');
-        glob.active = true;
-    }, error => {});
+    canvas.requestFullscreen().then(_=>{
+        canvas.requestPointerLock();
+    });
 }); 
 
 document.addEventListener('pointerlockchange', function(){
-    if (document.pointerLockElement == canvas || document.mozPointerLockElement == canvas) return;
-    glob.active = false;
-    document.querySelector('.description').classList.remove('hidden');
+    if (document.pointerLockElement == canvas) {
+        document.querySelector('.description').classList.add('hidden');
+        glob.active = true;
+    } else {
+        glob.active = false;
+        document.querySelector('.description').classList.remove('hidden');
+    }
+    
 })
 
 canvas.addEventListener('mousemove', function(e){
