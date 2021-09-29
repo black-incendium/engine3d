@@ -276,7 +276,7 @@ document.querySelector(".start span").addEventListener('click', function(){
 }); 
 
 document.addEventListener('pointerlockchange', function(){
-    if (document.pointerLockElement == canvas) return;
+    if (document.pointerLockElement == canvas || document.mozPointerLockElement == canvas) return;
     glob.active = false;
     document.querySelector('.description').classList.remove('hidden');
 })
