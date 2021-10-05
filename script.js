@@ -268,9 +268,13 @@ window.requestAnimationFrame(draw);
 canvas.requestPointerLock = canvas.requestPointerLock || canvas.mozRequestPointerLock;
 
 document.querySelector(".start span").addEventListener('click', function(){
-    canvas.requestFullscreen().then(_=>{
+    if (canvas.requestFullscreen) {
+        canvas.requestFullscreen().then(_=>{
+            canvas.requestPointerLock();
+        });
+    } else {
         canvas.requestPointerLock();
-    });
+    }
 }); 
 
 document.addEventListener('pointerlockchange', function(){
